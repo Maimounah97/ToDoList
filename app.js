@@ -1,8 +1,8 @@
 $(document).ready(function () {
 
-    $(".add-button").on("click", function () {
+    $(".add-button").click(function () {
         console.log("add clicked")
-        $(".add-task").slideDown('3000');
+        $(".add-task").slideToggle('3000');
 
     });
 
@@ -10,14 +10,18 @@ $(document).ready(function () {
 
     $(".add-task").on("submit", function (e) {
         e.preventDefault()
+        if ($("input").val() == "") {
+            $('.alert-warning').slideDown()
+            $('.alert-warning').delay(2000).slideUp()
 
-        if ($("input").val() != "") {
+        }
+        else {
 
             // $(".list-group").show()
-            $(".list-group").append("<li class='list-group-item d-flex justify-content-between shadow-sm p-3 mb-2 bg-white rounded'><span class='task'>"+$("input").val()+"</span><span class='btn delete m-0 p-0'>X</span></li>")
+            $(".list-group").append("<li class='list-group-item d-flex justify-content-between shadow-sm p-3 mb-2 bg-white rounded'><span class='task'>" + $("input").val() + "</span><span class='btn delete m-0 p-0'>X</span></li>")
+            $('.alert-success').slideDown()
+            $('.alert-success').delay(2000).slideUp()
         }
-        $('.alert-success').slideDown()
-        $('.alert-success').delay(4000).slideUp()
         $("input").val('')
         $(".add-task").slideUp('5000')
 
@@ -41,15 +45,11 @@ $(document).ready(function () {
     $("ul").on('click', '.delete', function () {
         $(this).parent().remove();
         $('.alert-danger').slideDown()
-        $('.alert-danger').delay(4000).slideUp()
+        $('.alert-danger').delay(2000).slideUp()
     })
 
 });
 
 
-// $(".delete").click( function () {
-//     $('.delete').parent().remove();
-//     $('.alert-danger').slideDown()
-//     $('.alert-danger').delay(4000).slideUp()
-// })
+
 
